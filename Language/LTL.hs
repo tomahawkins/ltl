@@ -55,10 +55,11 @@ data E a where
 data Directive
   = Assert String (E F)  -- ^ Property must be true.
   | Assume String (E F)  -- ^ Property is assumed to be true.  Becomes an assertion in simulation.
+  | Cover  String (E R)  -- ^ Sequence must be excited.
 
--- | Check a VCD file against a set of verification directives.  Returns a list of violations with time of failure (Just: safety violation, Nothing: liveness violation).
-checkVCD :: String -> [Directive] -> [(Directive, Maybe Int)]
-checkVCD vcd formulas = []
+-- | Check VCD data against a set of verification directives.  Returns a list of violations with time of failure (Just: safety violation, Nothing: liveness violation).
+checkVCD :: String -> Int -> [Directive] -> [(Directive, Maybe Int)]
+checkVCD vcd period formulas = []
   where
   VCD _ defs samples = parseVCD vcd
 
